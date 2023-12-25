@@ -19,7 +19,36 @@ const userSchema = new mongoose.Schema({
   },
   profilePicture: {
     type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ["Admin", "Student", "Teacher"],
+    required: true,
+  },
+  education: {
+    type: String,
     required: false,
+    default: null,
+  },
+  subject: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  cvImage: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  accountId: {
+    type: String,
+    required: false,
+    default: null,
+  },
+  isVerified: {
+    type: Boolean,
+    default: false,
   },
 });
 
