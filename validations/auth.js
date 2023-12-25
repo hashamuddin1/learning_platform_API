@@ -24,6 +24,18 @@ const userSignUpValidate = Joi.object({
   bankAccount: Joi.string().allow(null).allow(""),
 });
 
+const userLoginValidate = Joi.object({
+  emailAddress: Joi.string().email().required().messages({
+    "any.required": "Please Enter Your Email Address",
+    "string.empty": "Please Enter Your Email Address",
+  }),
+  password: Joi.string().required().messages({
+    "any.required": "Please Enter Your Password",
+    "string.empty": "Please Enter Your Password",
+  }),
+});
+
 module.exports = {
   userSignUpValidate,
+  userLoginValidate,
 };

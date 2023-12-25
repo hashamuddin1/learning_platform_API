@@ -2,7 +2,10 @@ const { users } = require("../models/userModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { userSignUpValidate } = require("../validations/auth");
+const {
+  userSignUpValidate,
+  userLoginValidate,
+} = require("../validations/auth");
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const PROCESS = process.env;
@@ -175,6 +178,15 @@ const userSignUp = async (req, res) => {
 
 const userLogin = async (req, res) => {
   try {
+    const { error } = userLoginValidate.validate(req.body, {
+      abortEarly: false,
+    });
+    if (error) {
+      return res.status(400).send({
+        status: 400,
+        message: error.details[0].message,
+      });
+    }
     const checkUser = await users
       .findOne({
         emailAddress: req.body.emailAddress,
