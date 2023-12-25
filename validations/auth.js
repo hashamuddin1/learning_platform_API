@@ -18,6 +18,10 @@ const userSignUpValidate = Joi.object({
     "string.empty": "Please Enter Your Role",
   }),
   profilePicture: Joi.string().allow(null).allow(""),
+  education: Joi.string().allow(null).allow(""),
+  subject: Joi.string().allow(null).allow(""),
+  cvImage: Joi.string().allow(null).allow(""),
+  bankAccount: Joi.string().allow(null).allow(""),
 });
 
 module.exports = {

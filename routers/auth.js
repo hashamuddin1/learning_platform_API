@@ -3,8 +3,17 @@ const authRouter = express.Router();
 const multer = require("multer");
 const upload = multer();
 
-const { userSignUp } = require("../controllers/authController");
+const { userSignUp, userLogin } = require("../controllers/authController");
 
-authRouter.post("/api/userSignUp",[upload.single("profilePicture")], userSignUp);
+authRouter.post(
+  "/api/userSignUp",
+  upload.fields([
+    { name: "profilePicture", maxCount: 1 },
+    { name: "cvImage", maxCount: 1 },
+  ]),
+  userSignUp
+);
+
+authRouter.post("/api/userLogin", userLogin);
 
 module.exports = authRouter;
